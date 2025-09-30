@@ -1,0 +1,16 @@
+{
+    "manifest_version": 3,
+    "name": "Night vision for KAI",
+    "version": "0.1",
+    "description": "Расширение для сайта kai.ru которое меняет тему сайта",
+    "permissions": [
+    "activeTab"
+    ],
+    "content_scripts": [
+        {
+        "matches": ["https://kai.ru/*"],
+        "js": ["content.js"],
+        "run_at": "document_idle"
+        }
+    ]
+}
