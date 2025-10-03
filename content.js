@@ -2,13 +2,14 @@
     const THEME_CLASS = 'nv-on';
 
     const css = `
-        .${THEME_CLASS} html,
+        .${THEME_CLASS},
         .${THEME_CLASS} body, 
         .${THEME_CLASS} div, 
         .${THEME_CLASS} footer,
         .${THEME_CLASS} .section .nav .active,
         .${THEME_CLASS} .section .nav a,
-        .${THEME_CLASS} .kai-btn-block {  
+        .${THEME_CLASS} .kai-btn-block,
+        .${THEME_CLASS} .breadcrumb {  
             background-color: black !important; 
         } 
         
@@ -29,7 +30,17 @@
             color: red !important; 
         }
 
-        
+        /*.${THEME_CLASS} li {
+          background-color: #000 !important;    
+          color: #39ff14 !important;      
+          border-left: 3px solid red !important;  
+          font-size: 14px !important; 
+          font-style: italic !important;
+          font-weight: bold !important;
+          text-decoration: underline !important;
+          border-radius: 4px !important;
+          box-shadow: 0 0 6px  rgba(57,255,20,.5) !important;
+        }*/
 `;
 
   // вставка style в страницу
@@ -52,8 +63,54 @@
       btn.title = on ? 'Night Vision: ON' : 'Night Vision: OFF';
       btn.style.boxShadow = on ? '0 0 0 2px #39ff13 inset' : 'none'; //свечение при включении
     }
-  }
 
+    const liNodes = document.querySelectorAll('.section .nav li, .breadcrumb li, li');
+    liNodes.forEach((li) => {
+    if (on) { // применение стилей к найденным li
+      li.style.backgroundColor = '#000';
+      li.style.color = '#39ff14';
+      li.style.borderLeft = '3px solid red';
+      li.style.fontSize = '14px';
+      li.style.fontStyle = 'italic';
+      li.style.fontWeight = 'bold';
+      li.style.textDecoration = 'underline';
+      li.style.borderRadius = '4px';
+      li.style.boxShadow = '0 0 6px rgba(57,255,20,.5)';
+
+      // пример использования children: часто у <li> первый ребёнок — <a>, перекрасим ссылку
+      const first = li.children && li.children[0]; // если есть ребенок, то берем первого ребенка 
+      if (first && first.tagName === 'A') { // прговеряем что first есть(ребенок нашелся на предыдущей строчке) и если тэг называется a то делаем ww
+        first.style.color = '#e72545ff'; // немного отличается от красного 
+      }
+
+      // пример использования parentElement: пометим родительский список тонкой зеленой рамкой
+      const ul = li.parentElement;
+      if (ul && (ul.tagName === 'UL' || ul.tagName === 'OL')) {
+        ul.style.outline = '1px dashed rgba(57,255,20,.3)'; 
+      }
+    } else {// снимаем только то, что ставили
+      li.style.backgroundColor = '';
+      li.style.color = '';
+      li.style.borderLeft = '';
+      li.style.fontSize = '';
+      li.style.fontStyle = '';
+      li.style.fontWeight = '';
+      li.style.textDecoration = '';
+      li.style.borderRadius = '';
+      li.style.boxShadow = '';
+
+      const first = li.children && li.children[0];
+      if (first && first.tagName === 'A') {
+        first.style.color = '';
+      }
+
+      const ul = li.parentElement;
+      if (ul && (ul.tagName === 'UL' || ul.tagName === 'OL')) {
+        ul.style.outline = '';
+      }
+    }
+    });
+  }
   // вставка кнопки на  страницу
   function mountButton() {
     if (document.getElementById('nv-toggle-btn')) return; // если уже есть то выходим
@@ -104,8 +161,3 @@
     init();
   }
 })();
-
-//запушить
-//проверить по требованиям
-//переделать если надо
-// запушить на student-lab3-41
