@@ -1,3 +1,5 @@
+'use strict';
+
 (function nightVision() {
     const THEME_CLASS = 'nv-on';
 
@@ -41,7 +43,7 @@
           border-radius: 4px !important;
           box-shadow: 0 0 6px  rgba(57,255,20,.5) !important;
         }*/
-`;
+      `;
 
   // вставка style в страницу
   function ensureStyle() {
