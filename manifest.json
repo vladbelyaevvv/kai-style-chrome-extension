@@ -5,7 +5,7 @@
     "description": "Расширение для сайта kai.ru которое меняет тему сайта",
     "content_scripts": [
         {
-        "matches": ["https://kai.ru/*", "https://vk.ru/*" ],
+        "matches": ["https://kai.ru/*"],
         "js": ["content.js"],
         "run_at": "document_end"
         }
